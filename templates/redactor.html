@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-center">
+        Создание нового мема
+    </h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-7">
+
+                    <div class="input-group mb-3 load">
+                        {{ form.photo(class="form-control") }}
+                        {% for error in form.photo.errors %}
+                            <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <p></p>
+                    <div>{{ form.category.label }} {{ form.category(rows=7, multiple=True) }}</div>
+                    <p>
+                        {{ form.about.label }}<br>
+                        {{ form.about(class="form-control") }}<br>
+                        {% for error in form.about.errors %}
+                            <p class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </p>
+                        {% endfor %}
+                    </p>
+                    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+{% endblock %}

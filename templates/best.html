@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        .round {
+            position: relative;
+            border-radius: 150px;
+            border: 3px;
+            top: 30px;
+            box-shadow: 0 0 7px #666;
+        }
+    </style>
+    <style>
+        .load {
+            position: relative;
+            width: 300px;
+            top: 30px;
+            box-shadow: 0 0 7px #666;
+        }
+    </style>
+    <div style="text-align: center;">
+        <h1> Ваше любимое </h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="container overflow-hidden">
+                <div class="row gy-5">
+                    {% for item in fe %}
+                        <div class="col-4">
+                            {% if item['act'] %}
+                                <div class="container-fluid">
+                                    <a style="color: #0d2838">
+                                        <img src="static/User/{{ item['av'] }}" alt="" width="30" height="30" class="d-inline-block align-text-top lil-ava">
+                                        {{ item['nick'] }}
+                                    </a>
+                                </div>
+                            {% else%}
+                                <div class="container-fluid">
+                                    <a style="color: #0d2838" href="/stranger_profile/{{ item['us_id'] }}">
+                                        <img src="static/User/{{ item['av'] }}" alt="" width="30" height="30" class="d-inline-block align-text-top lil-ava">
+                                        {{ item['nick'] }}
+                                    </a>
+                                </div>
+                            {% endif %}
+                            <img src="static/User/{{ item['way'] }}" alt="ops image" class="img-fluid"  >
+                            <h6 style="color: #64605a">
+                                {{ item['about'] }}
+                            </h6>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        .round {
+            position: relative;
+            border-radius: 150px;
+            border: 3px;
+            top: 30px;
+            box-shadow: 0 0 7px #666;
+        }
+    </style>
+    <style>
+        .load {
+            position: relative;
+            width: 300px;
+            top: 30px;
+            box-shadow: 0 0 7px #666;
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>
+                    {{ name }}
+                </h1>
+                <h1>
+                    <img src="{{ url_for("static", filename="User/"+another_avatar) }}" alt="" width="300" height="300" class="round">
+
+                </h1>
+            </div>
+            <div class="col bg-light" style="border-radius: 20px">
+                <div style="text-align: center;">
+                    <h1>
+                        {{ nick }}
+                    </h1>
+                    <img src="{{ url_for("static", filename="Levels/"+lvl+".png") }}" alt="" width="200" height="200">
+                    <h6 style="color: #504b42">
+                        Уровень {{ lvl }}: {{ lvl_name }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-md-auto">
+                <img src="{{ url_for("static", filename="Maps/"+id+".png") }}" alt="" width="600" height="450">
+            </div>
+        </div>
+    </div>
+    <p></p>
+    <div style="text-align: center;">
+        <h1> Мемчики {{ nick }} </h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="container overflow-hidden">
+                <div class="row gy-5">
+                    {% for item in memes %}
+                        <div class="col-4">
+                            <img src="{{ url_for("static", filename="User/"+item[2]) }}" alt="ops image" class="img-fluid"  >
+                            <h6 style="color: #64605a">
+                                {{ item[1] }}
+                            </h6>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

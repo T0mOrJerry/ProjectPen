@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% for item in adv %}
+                    <div class="sticky-top">
+                        <div class="sticky-left">
+                            <img src="{{ item }}" class="rounded float-start" width="300" height="400" alt="advert">
+                            <p></p>
+                        </div>
+                    </div>
+                    <p></p>
+                {% endfor %}
+            </div>
+            <div class="col-6">
+                {% for item in fe %}
+                    <div style="text-align: center;">
+                        <figure class="figure">
+                            {% if item['act'] %}
+                                <div class="container-fluid">
+                                    <a style="color: #0d2838">
+                                        <img src="static/User/{{ item['av'] }}" alt="" width="30" height="30" class="d-inline-block align-text-top lil-ava">
+                                        {{ item['nick'] }}
+                                    </a>
+                                </div>
+                            {% else%}
+                                <div class="container-fluid">
+                                    <a style="color: #0d2838" href="/stranger_profile/{{ item['us_id'] }}">
+                                        <img src="static/User/{{ item['av'] }}" alt="" width="30" height="30" class="d-inline-block align-text-top lil-ava">
+                                        {{ item['nick'] }}
+                                    </a>
+                                </div>
+                            {% endif %}
+                            <img src="static/User/{{ item['way'] }}"
+                                 class="figure-img img-fluid rounded position-relative" width="400" height="300"
+                                 alt="kartinka">
+                            <figcaption class="figure-caption">{{ item['about'] }}</figcaption>
+                            <form action="" method="post">
+                                <button class="btn btn-primary" type="submit" name="action" value="{{ item['id'] }}">
+                                    {{ item['likes'] }}👍
+                                </button>
+                            </form>
+                        </figure>
+                    </div>
+                    <br>
+                    <p>
+                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapse{{ item['id'] }}"
+                           role="button"
+                           aria-expanded="false" aria-controls="collapse{{ item['id'] }}">
+                            Comments...
+                        </a>
+                    </p>
+                    <form action="" method="post">
+                        {{ form.com.label }} <br>
+                        {{ form.com(class="form-control") }}<br>
+                        <button class="btn btn-primary" type="submit" name="comment" value="{{ item['id'] }}">
+                            Send
+                        </button>
+                    </form>
+                    <div class="collapse" id="collapse{{ item['id'] }}">
+                        <div class="card card-body">
+                            <div id="list-example" class="list-group">
+                                {% for i in item['comments'] %}
+                                    <a class="list-group-item list-group-item-action"
+                                       href="/stranger_profile/{{ item['id'] }}">{{ i['user_nick'] }}</a>
+                                {% endfor %}
+                            </div>
+                            <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0"
+                                 class="scrollspy-example" tabindex="0">
+                                {% for i in item['comments'] %}
+                                    <h4 id="{{ i['user_nick'] }}">{{ i['comment'] }} -{{ i['time'] }}</h4>
+                                    <p></p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                <p>Oсортировать</p>
+                <p></p>
+                <form action="" method="post">
+                    {{ sort.example }}
+                    <button class="btn btn-primary" type="submit" name="sort" value="sort">Sort</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

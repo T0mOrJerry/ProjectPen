@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        .round {
+            position: relative;
+            border-radius: 150px;
+            border: 3px;
+            top: 30px;
+            box-shadow: 0 0 7px #666;
+        }
+    </style>
+    <style>
+        .load {
+            position: relative;
+            width: 300px;
+            top: 30px;
+            box-shadow: 0 0 7px #666;
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>
+                    {{ name }} {{ surname }}
+                </h1>
+                <h1>
+                    <img src="static/User/{{ avatar }}" alt="" width="300" height="300" class="round">
+                    <p>
+                    <form method="POST" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <div class="input-group mb-3 load">
+                            {{ form.photo(class="form-control") }}
+                            {% for error in form.photo.errors %}
+                                <span style="color: red;">{{ error }}</span>
+                            {% endfor %}
+                            {{ form.submit(class="btn btn-outline-secondary") }}
+                        </div>
+                    </form>
+                    </p>
+                </h1>
+            </div>
+            <div class="col bg-light" style="border-radius: 20px">
+                <div style="text-align: center;">
+                    <h1>
+                        {{ nick }}
+                    </h1>
+                    <h4 style="color: #49423d">
+                        {{ mail }}
+                    </h4>
+                    <img src="static/Levels/{{ lvl }}.png" alt="" width="200" height="200">
+                    <h6 style="color: #504b42">
+                        Уровень {{ lvl }}: {{ lvl_name }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-md-auto">
+                <img src="static/Maps/{{ id }}.png" alt="" width="600" height="450">
+            </div>
+        </div>
+    </div>
+    <p></p>
+    <div style="text-align: center;">
+        <h1> Твои мемчики </h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="container overflow-hidden">
+                <div class="row gy-5">
+                    {% for item in memes %}
+                        <div class="col-4">
+                            <img src="static/User/{{ item[2] }}" class="img-fluid"  alt="">
+                            <h6 style="color: #64605a">
+                                {{ item[1] }}
+                            </h6>
+                        </div>
+                    {% endfor %}
+                    <div class="col-4 card">
+                        <h5 class="card-title text-center">Добавь новый мем</h5>
+                        <img src="static/User/Memes/await.jpg" class="img-fluid" alt="...">
+                        <div class="card-body">
+                            <a href="/create" class="stretched-link" style="color: white;">Перейти куда-нибудь</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
